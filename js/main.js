@@ -147,21 +147,55 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-icon", getCurrentIcon())
 })
 
-/* Mail integration */
-document.addEventListener("DOMContentLoaded", function() {
-  emailjs.init("A9PZASRNY-NxAYHQX")
+/* Mail integration ---------------------------------------------------------
+   Replace the three placeholders below with your own EmailJS credentials
+   (https://dashboard.emailjs.com). Until then, the form falls back to
+   opening the visitor's mail client addressed to CONTACT_EMAIL.
+-------------------------------------------------------------------------- */
+const CONTACT_EMAIL = "mefta.ruet19@gmail.com"
+const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY"
+const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID"
+const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID"
+
+const emailjsConfigured = !EMAILJS_PUBLIC_KEY.startsWith("YOUR_")
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (emailjsConfigured && window.emailjs) {
+    emailjs.init(EMAILJS_PUBLIC_KEY)
+  }
 })
 
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault()
+const contactForm = document.getElementById("contact-form")
 
-  emailjs.sendForm('service_btvk1js', 'template_zhvgvnk', this)
-    .then(function(response) {
-      console.log('Success!', response.status, response.text)
-      alert('Email sent successfully!')
-      document.getElementById('contact-form').reset()
-    }, function(error) {
-      console.log('Failed...', error)
-      alert('Email sending failed.')
-    })
-})
+if (contactForm) {
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault()
+
+    if (emailjsConfigured && window.emailjs) {
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this).then(
+        function (response) {
+          console.log("Success!", response.status, response.text)
+          alert("Email sent successfully!")
+          contactForm.reset()
+        },
+        function (error) {
+          console.log("Failed...", error)
+          alert("Email sending failed.")
+        }
+      )
+      return
+    }
+
+    /* Fallback: open the visitor's mail client with the form contents. */
+    const name = document.getElementById("name").value
+    const email = document.getElementById("email").value
+    const subject = document.getElementById("subject").value
+    const message = document.getElementById("message").value
+    const body = "Name: " + name + "\nEmail: " + email + "\n\n" + message
+
+    window.location.href =
+      "mailto:" + CONTACT_EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body)
+  })
+}
