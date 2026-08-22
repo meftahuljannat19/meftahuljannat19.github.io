@@ -1,10 +1,10 @@
 BEGIN:VCARD
 VERSION:4.0
-FN:Jannat, Meftahul
-N:Jannat;Meftahul;
-TITLE:Lecturer, Dept. of ICT, BAUST
-ORG:Bangladesh Army University of Science and Technology (BAUST)
+FN:Jannat, M.
+N:Meftahul Jannat;
+TITLE:Lecturer, Dept. of ICT, Bangladesh Army University of Science and Technology (BAUST)
 EMAIL:mefta.ruet19@gmail.com
-URL;TYPE=PORTFOLIO:https://meftahuljannat.vercel.app/
-X-SOCIALPROFILE;TYPE=GITHUB:https://github.com/meftahuljannat19
+TEL:+8801716155607
+URL;TYPE=PORTFOLIO:https://meftahuljannat19.github.io/
+X-SOCIALPROFILE;TYPE=LINKEDIN:https://www.linkedin.com/in/meftahul-jannat-ruet19/
 END:VCARD
