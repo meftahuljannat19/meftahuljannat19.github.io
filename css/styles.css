@@ -987,4 +987,14 @@ img {
   .footer-links .footer-link {
     margin-left: var(--mb-1);
   }
+  .download-container {
+  display: flex;
+  justify-content: center;
+}
+.download-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
 }/*# sourceMappingURL=styles.css.map */
